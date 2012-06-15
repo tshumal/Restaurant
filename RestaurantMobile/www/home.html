@@ -18,7 +18,6 @@
 		    $.mobile.linkBindingEnabled = false;
 		    $.mobile.hashListeningEnabled = false;
 		    $.mobile.pushStateEnabled = false;
-		    
 		    //Remove page from DOM when it's being replaced
 		    $("div:jqmData(role='page')").on('pagehide', function (event, ui) {
 			    $(event.currentTarget).remove();
