@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Restaurant</title>
+        <link rel="stylesheet" href="css/Restaurant.css" />        
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.0.min.css" />        
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script>
+		$(document).bind("mobileinit", function(){
+			//Remove Page and dialog Transition Effects to 
+			//improve performance and some issues
+			$.mobile.defaultPageTransition = 'none';
+			$.mobile.defaultDialogTransition = 'none';
+			//Disable JqueryMobile Routing Capabilities
+			$.mobile.ajaxEnabled = false;
+		    $.mobile.linkBindingEnabled = false;
+		    $.mobile.hashListeningEnabled = false;
+		    $.mobile.pushStateEnabled = false;
+		    
+		    //Remove page from DOM when it's being replaced
+		    $("div:jqmData(role='page')").on('pagehide', function (event, ui) {
+			    $(event.currentTarget).remove();
+			});
+		});
+		
+		</script>        
+        <script src="js/jquery.mobile-1.1.0.min.js"></script>
+		<link rel="stylesheet" href="css/jqm.slidemenu.css" />
+		<script src="js/jqm.slidemenu.js"></script>
+        <script src="js/data.js"></script>
+    </head>
+    <body>
+    	<div id="slidemenu">
+			<h3>Menu</h3>
+			<ul>
+				<li><a href="#home" data-icon="grid">Home</a></li>
+				<li><a href="#menu" data-icon="grid">Menu</a></li>
+				<li><a href="#orders" data-icon="star">Orders</a></li>
+				<li><a href="#reserves" data-icon="check">Reserves</a></li>
+				<li><a href="#stores" data-icon="home">Stores</a></li>
+			</ul>
+		</div>
+    
+		<div data-role="page" id ="home">			
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<h1>Restaurant</h1>
+			</div>
+		
+			<div data-role="content">
+				
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#menu" data-icon="grid">Menu</a></li>
+						<li><a href="#orders" data-icon="star">Orders</a></li>
+						<li><a href="#reserves" data-icon="check">Reserves</a></li>
+						<li><a href="#stores" data-icon="home">Stores</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="reserves">
+			<script type="text/javascript">
+			$(document).ready(function() {
+				listReserves();
+			});
+			</script>		
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h2>Reservations</h2>
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
+			</div>
+		
+			<div data-role="content">	
+				<ul id="listReserves" data-role="listview" data-inset="true"></ul>
+				<a href="#addReserve" data-role="button" data-icon="add">Add Reserve</a>
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#menu" data-icon="grid">Menu</a></li>
+						<li><a href="#orders" data-icon="star">Orders</a></li>
+						<li><a href="#reserves" data-icon="check" class="ui-btn-active">Reserves</a></li>
+						<li><a href="#stores" data-icon="home">Stores</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="stores">
+			<script type="text/javascript">
+			$(document).ready(function() {
+				listStores();
+			});
+			</script>
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h2>Stores</h2>
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
+			</div>
+		
+			<div data-role="content">	
+				<ul id="listStores" data-role="listview" data-inset="true" data-filter="true"></ul>
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#menu" data-icon="grid">Menu</a></li>
+						<li><a href="#orders" data-icon="star">Orders</a></li>
+						<li><a href="#reserves" data-icon="check">Reserves</a></li>
+						<li><a href="#stores" data-icon="home" class="ui-btn-active">Stores</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id ="addReserve">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">		
+				<h2>Add Reserve</h2>
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
+			</div>
+		
+			<div data-role="content">
+				<form action="#" method="get">
+				<div data-role="fieldcontain">
+				    <label for="addNumPeople"><b>People</b></label>
+				    <select name="select-sucursal" id="addNumPeople">
+						<option>Select Number</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>						
+					</select>
+				</div>
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend><b>Reserve Date</b></legend>
+						<label for="select-choice-month">Month</label>
+						<select name="select-choice-month" id="select-choice-month">
+							<option value="jan">Jan</option>
+							<option value="dec">Dec</option>
+							<option value="feb">Feb</option>
+							<option value="mar">Mar</option>
+							<option value="apr">Apr</option>
+							<option value="may">May</option>
+							<option value="jun">Jun</option>
+							<option value="jul">Jul</option>
+							<option value="aug">Aug</option>
+							<option value="sep">Sep</option>
+							<option value="oct">Oct</option>
+							<option value="nov">Nov</option>
+							<option value="dec">Dec</option>
+						</select>
+				
+						<label for="select-choice-day">Day</label>
+						<select name="select-choice-day" id="select-choice-day">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">13</option>
+							<option value="13">14</option>
+							<option value="15">15</option>
+						</select>
+				
+						<label for="select-choice-year">Year</label>
+						<select name="select-choice-year" id="select-choice-year">
+							<option value="2011">2012</option>
+							<option value="2011">2011</option>
+							<option value="2010">2010</option>
+							<option value="2009">2009</option>
+							<option value="2008">2008</option>
+							<option value="2007">2007</option>
+							<option value="2006">2006</option>
+							<option value="2005">2005</option>
+							<option value="2004">2004</option>
+						</select>
+					</fieldset>
+				</div>
+				<div data-role="fieldcontain">
+				    <label for="add-select-store"><b>Store</b></label>
+					<select name="select-sucursal" id="add-select-store" data-native-menu="false">
+						<option>Select Store</option>
+						<option value="1">Galerias</option>
+						<option value="2">Nicolas Federman</option>						
+					</select>
+				</div>
+				<a id="addReserveBtn" href="#reserves" data-role="button" data-icon="check">Save Reserve</a>
+				</form>
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#menu" data-icon="grid">Menu</a></li>
+						<li><a href="#orders" data-icon="star">Orders</a></li>
+						<li><a href="#reserves" data-icon="check" class="ui-btn-active">Reserves</a></li>
+						<li><a href="#stores" data-icon="home">Stores</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="detailReserve">
+			<script type="text/javascript">
+			$(document).ready(function() {
+				getReserva('suc_1');
+			});
+			</script>
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h2>Reserve</h2>
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
+			</div>
+			<input type="hidden" id="hdnIdReserva" value="" />
+			<div data-role="content">	
+				<p><b>Store</b><span id="resSucursalDetalle2"></span></p>
+				<p><b>Date</b><span id="resFechaDetalle"></span></p>
+				<p><b>People</b><span id="resNumDetalle"></span></p>
+				<div style="text-align:center;">
+				<a id="inviteFriendBtn" href="#" data-role="button" data-inline="false" data-icon="star">Invitar un Amigo</a>
+				<a id="deleteReservaBtn" href="#reservas" data-role="button" data-inline="false" data-icon="delete">Eliminar Reserva</a>
+				</div>
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#menu" data-icon="grid">Menu</a></li>
+						<li><a href="#orders" data-icon="star">Orders</a></li>
+						<li><a href="#reserves" data-icon="check" class="ui-btn-active">Reserves</a></li>
+						<li><a href="#stores" data-icon="home">Stores</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="detalleSucursal">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h2>Sucursal</h2>
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
+			</div>
+			<input type="hidden" id="hdnIdSucursal" value="" />
+			<div data-role="content">
+				<img src="img/noimage.png" width="150" height="150"/>
+				<p><b>Télefono:</b><span id="sucTelDetalle"></span></p>
+				<p><b>Dirección:</b><span id="sucDirDetalle"></span></p>
+				<a id="callSucursalBtn" href="#" data-role="button" data-icon="info">Llamar a la Sucursal</a>				
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#" data-icon="grid">Menu</a></li>
+						<li><a href="#" data-icon="home">Stores</a></li>
+						<li><a href="#" data-icon="check">Reservations</a></li>
+						<li><a href="#" data-icon="star">My Info</a></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</body>    
+</html>
