@@ -2,33 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Restaurant</title>
-        <link rel="stylesheet" href="css/Restaurant.css" />        
-        <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.0.min.css" />        
-        <script src="js/jquery-1.7.1.min.js"></script>
-        <script>
-		$(document).bind("mobileinit", function(){
-			//Remove Page and dialog Transition Effects to 
-			//improve performance and some issues
-			$.mobile.defaultPageTransition = 'none';
-			$.mobile.defaultDialogTransition = 'none';
-			//Disable JqueryMobile Routing Capabilities
-			$.mobile.ajaxEnabled = false;
-		    $.mobile.linkBindingEnabled = false;
-		    $.mobile.hashListeningEnabled = false;
-		    $.mobile.pushStateEnabled = false;
-		    //Remove page from DOM when it's being replaced
-		    $("div:jqmData(role='page')").on('pagehide', function (event, ui) {
-			    $(event.currentTarget).remove();
-			});
-		});
-		
-		</script>        
-        <script src="js/jquery.mobile-1.1.0.min.js"></script>
-		<link rel="stylesheet" href="css/jqm.slidemenu.css" />
-		<script src="js/jqm.slidemenu.js"></script>
-        <script src="js/data.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
+        <link rel="stylesheet" href="css/Restaurant.css" />
+        <link rel="stylesheet" href="css/jqm.slidemenu.css" />
+        <script src="lib/jquery-1.7.1.min.js"></script>
+        <script src="lib/jqm-config.js"></script>
+        <script src="lib/jquery.mobile-1.1.1.min.js"></script>
+        <script src="lib/underscore-min.js"></script>
+    	<script src="lib/backbone-min.js"></script>
+        <script src="lib/jqm.slidemenu.js"></script>
+        <script src="src/data.js"></script>
+        
+        <script src="src/app.js"></script>
+        
+        <script src="src/controller/store.js"></script>
+        <script src="src/model/store.js"></script>
     </head>
     <body>
     	<div id="slidemenu">
@@ -63,6 +53,30 @@
 				</div>
 			</div>
 		</div>
+		
+		<div data-role="page">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h2>Default</h2>
+				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
+			</div>
+		
+			<div data-role="content" id="default">	
+				
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#menu" data-icon="grid">Menu</a></li>
+						<li><a href="#orders" data-icon="star">Orders</a></li>
+						<li><a href="#reserves" data-icon="check" class="ui-btn-active">Reserves</a></li>
+						<li><a href="#stores" data-icon="home">Stores</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
 		<div data-role="page" id="reserves">
 			<script type="text/javascript">
 			$(document).ready(function() {
@@ -87,33 +101,6 @@
 						<li><a href="#orders" data-icon="star">Orders</a></li>
 						<li><a href="#reserves" data-icon="check" class="ui-btn-active">Reserves</a></li>
 						<li><a href="#stores" data-icon="home">Stores</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div data-role="page" id="stores">
-			<script type="text/javascript">
-			$(document).ready(function() {
-				listStores();
-			});
-			</script>
-			<div data-role="header" data-position="fixed" data-tap-toggle="false">
-				<h2>Stores</h2>
-				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
-				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
-			</div>
-		
-			<div data-role="content">	
-				<ul id="listStores" data-role="listview" data-inset="true" data-filter="true"></ul>
-			</div>
-			
-			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
-				<div data-role="navbar" data-iconpos="bottom">
-					<ul>
-						<li><a href="#menu" data-icon="grid">Menu</a></li>
-						<li><a href="#orders" data-icon="star">Orders</a></li>
-						<li><a href="#reserves" data-icon="check">Reserves</a></li>
-						<li><a href="#stores" data-icon="home" class="ui-btn-active">Stores</a></li>
 					</ul>
 				</div>
 			</div>
