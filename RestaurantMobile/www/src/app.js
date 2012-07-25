@@ -2,46 +2,42 @@ var App = App || {};
 
 App.controller = App.controller || {};
 App.model = App.model || {};
-App.view = App.view || {};
 App.collection = App.collection || {};
+App.view = App.view || {
 
-var tpl = {
+    // Hash of preloaded views for the app
+    views:{},
 
-	    // Hash of preloaded templates for the app
-	    templates:{},
+    // Recursively pre-load all the views for the app.
+    // This implementation should be changed in a production environment. All the views files should be
+    // concatenated in a single file.
+    loadViews:function (names, callback) {
 
-	    // Recursively pre-load all the templates for the app.
-	    // This implementation should be changed in a production environment. All the template files should be
-	    // concatenated in a single file.
-	    loadTemplates:function (names, callback) {
+        var that = this;
 
-	        var that = this;
+        var loadView = function (index) {
+            var name = names[index];            
+            $.get('src/view/' + name + '.html', function (data) {
+                that.views[name] = data;
+                index++;
+                if (index < names.length) {
+                	loadView(index);
+                } else {
+                    callback();
+                }
+            });
+        };
 
-	        var loadTemplate = function (index) {
-	            var name = names[index];
-	            console.log('Loading template: ' + name);
-	            $.get('src/view/' + name + '.html', function (data) {
-	                that.templates[name] = data;
-	                index++;
-	                if (index < names.length) {
-	                    loadTemplate(index);
-	                } else {
-	                    callback();
-	                }
-	            });
-	        };
+        loadView(0);
+    },
 
-	        loadTemplate(0);
-	    },
-
-	    // Get template by name from hash of preloaded templates
-	    get:function (name) {
-	    	console.log('get template: ' + name);
-	    	console.log(this.templates[name]);
-	        return this.templates[name];
-	    }
-
-	};
+    // Get View by Name from hash of preloaded views
+    get:function (name) {
+    	console.log('get view: ' + name);
+    	console.log('aaa ' + this.views[name]);
+        return this.views[name];
+    }
+};
 
 App.Router = Backbone.Router.extend({
 
@@ -87,7 +83,7 @@ App.Router = Backbone.Router.extend({
 });
 
 $(document).ready(function () {
-    tpl.loadTemplates(['storeList'],
+    App.view.loadViews(['storeList'],
         function () {
     		app = new App.Router();
             Backbone.history.start();
