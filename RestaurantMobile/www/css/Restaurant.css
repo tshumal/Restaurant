@@ -315,7 +315,7 @@
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-c {
-	border: 1px solid #B3B3B3 /*{c-bar-border}*/;
+	border: none /*{c-bar-border}*/;
 	background: #e9eaeb /*{c-bar-background-color}*/;
 	color: #3E3E3E /*{c-bar-color}*/;
 	font-weight: bold;

@@ -1,6 +1,6 @@
 App.model.Store = Backbone.Model.extend({
 
-    urlRoot:"../api/employees",
+    urlRoot:"http://localhost:8080/RestaurantServer/rest/api/getStorebyId/",
     
     defaults: {
     	id : 0,
@@ -13,9 +13,7 @@ App.model.Store = Backbone.Model.extend({
     },
     
     initialize:function () {
-    	console.log('Loading App.model.Store');
-        this.stores = new App.collection.StoreCollection();
-        this.stores.url = '../api/employees/' + this.id + '/reports';
+        
     }
 
 });
@@ -24,8 +22,8 @@ App.collection.StoreCollection = Backbone.Collection.extend({
 
     model:App.model.Store,
 
-    url:"../api/employees",
-
+    url:"http://localhost:8080/RestaurantServer/rest/api/listStores",
+    
     findByName:function (key) {
         var url = (key == '') ? '../api/employees' : "../api/employees/search/" + key;
         console.log('findByName: ' + key);
@@ -34,7 +32,6 @@ App.collection.StoreCollection = Backbone.Collection.extend({
             url:url,
             dataType:"json",
             success:function (data) {
-                console.log("search success: " + data.length);
                 self.reset(data);
             }
         });
