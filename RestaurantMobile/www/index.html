@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
         <link rel="stylesheet" href="css/Restaurant.css" />
         <link rel="stylesheet" href="css/jqm.slidemenu.css" />
-        <script src="lib/jquery-1.7.1.min.js"></script>
+        <script src="lib/jquery-1.7.1.js"></script>
         <script src="lib/jqm-config.js"></script>
         <script src="lib/jquery.mobile-1.1.1.min.js"></script>
         <script src="lib/underscore-min.js"></script>
-    	<script src="lib/backbone-min.js"></script>
+    	<script src="lib/backbone.js"></script>
         <script src="lib/jqm.slidemenu.js"></script>
         <script src="src/data.js"></script>
         
@@ -198,31 +198,6 @@
 				</div>
 			</div>
 		</div>
-		<div data-role="page" id="detalleSucursal">
-			<div data-role="header" data-position="fixed" data-tap-toggle="false">
-				<h2>Sucursal</h2>
-				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
-				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
-			</div>
-			<input type="hidden" id="hdnIdSucursal" value="" />
-			<div data-role="content">
-				<img src="img/noimage.png" width="150" height="150"/>
-				<p><b>Télefono:</b><span id="sucTelDetalle"></span></p>
-				<p><b>Dirección:</b><span id="sucDirDetalle"></span></p>
-				<a id="callSucursalBtn" href="#" data-role="button" data-icon="info">Llamar a la Sucursal</a>				
-			</div>
-			
-			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
-				<div data-role="navbar" data-iconpos="bottom">
-					<ul>
-						<li><a href="#" data-icon="grid">Menu</a></li>
-						<li><a href="#" data-icon="home">Stores</a></li>
-						<li><a href="#" data-icon="check">Reservations</a></li>
-						<li><a href="#" data-icon="star">My Info</a></li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
+		
 	</body>    
 </html>

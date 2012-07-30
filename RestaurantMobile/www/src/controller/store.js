@@ -3,15 +3,37 @@ App.controller.StoreList = Backbone.View.extend({
 	initialize: function(){
     	// Compile the template using underscore
         this.view = _.template(App.view.get('storeList'));
-        //Initialize the Info
-        this.stores = new App.collection.StoreCollection();
-    	this.stores.fetch();
-    	this.json = this.stores.toJSON();
-    	console.log(this.json);
+        this.model.bind("reset", this.render, this);
+        this.render();
+    },
+    events: {
+        "click a.back": "back"
     },
     render: function(){
-    	// Load the compiled HTML into the Backbone "el"
-    	 $(this.el).html( this.view );
-        return this;
+    	App.view.changePage(this);
+    	return this;
+    },
+    back: function(){    	
+    	window.history.back();
+    }
+});
+
+App.controller.StoreView = Backbone.View.extend({
+	
+	initialize: function(){
+    	// Compile the template using underscore
+        this.view = _.template(App.view.get('storeView'));
+        this.model.bind("reset", this.render, this);
+        this.render();
+    },
+    events: {
+        "click a.back": "back"
+    },
+    render: function(){
+    	App.view.changePage(this);
+    	return this;
+    },
+    back: function(){    	
+    	window.history.back();
     }
 });

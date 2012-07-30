@@ -1,13 +1,12 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
-	<h2>Stores</h2>
+	<h2>Store</h2>
 	<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
 	<a href="#" data-icon="back" class="back" data-iconpos="notext">Back</a>
 </div>
-
 <div data-role="content">
-	<ul id="storeList" data-role="listview" data-inset="true" data-filter="true">
-		<% model.each(function(item) { %>
-			<li><a href="#stores/<%= item.id %>"><img src="img/<%= item.get('image') %>"/><h1><%= item.get('name') %></h1><p><%= item.get('address') %></p></a></li>
-      	<% }); %>
-	</ul>
+	<img src="img/<%= model.get('image') %>" width="150" height="150"/>
+	<p><b>Name:</b><%= model.get('name') %></p>
+	<p><b>Phone:</b><%= model.get('phone') %></p>
+	<p><b>Address:</b><%= model.get('address') %></p>
+	<a id="call" href="#" data-role="button" data-icon="info">Call Store</a>				
 </div>

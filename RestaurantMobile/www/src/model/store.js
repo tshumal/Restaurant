@@ -1,6 +1,6 @@
 App.model.Store = Backbone.Model.extend({
 
-    urlRoot:"http://localhost:8080/RestaurantServer/rest/api/getStorebyId/",
+    urlRoot:"http://localhost:8080/RestaurantServer/rest/api/stores/",
     
     defaults: {
     	id : 0,
@@ -15,26 +15,12 @@ App.model.Store = Backbone.Model.extend({
     initialize:function () {
         
     }
-
 });
 
 App.collection.StoreCollection = Backbone.Collection.extend({
 
     model:App.model.Store,
 
-    url:"http://localhost:8080/RestaurantServer/rest/api/listStores",
-    
-    findByName:function (key) {
-        var url = (key == '') ? '../api/employees' : "../api/employees/search/" + key;
-        console.log('findByName: ' + key);
-        var self = this;
-        $.ajax({
-            url:url,
-            dataType:"json",
-            success:function (data) {
-                self.reset(data);
-            }
-        });
-    }
+    url:"http://localhost:8080/RestaurantServer/rest/api/stores"
 
 });
