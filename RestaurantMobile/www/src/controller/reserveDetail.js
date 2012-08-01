@@ -1,8 +1,8 @@
-App.controller.StoreDetail = Backbone.View.extend({
+App.controller.ReserveDetail = Backbone.View.extend({
 	
 	initialize: function(){
     	// Compile the template using underscore
-        this.view = _.template(App.view.get('storeDetail'));
+        this.view = _.template(App.view.get('reserveDetail'));
         this.model.bind("reset", this.render, this);
         this.render();
     },

@@ -21,6 +21,11 @@ App.collection.StoreCollection = Backbone.Collection.extend({
 
     model:App.model.Store,
 
-    url:App.config.getProperty('serverURL')+"stores"
+    url:App.config.getProperty('serverURL')+"stores",
+    
+    //Method to be triggered to refresh the data that needs to be formatted
+    change:function (){
+    	//There is no data to be refreshed in this model
+    }
 
 });

@@ -10,6 +10,9 @@ App.controller.StoreList = Backbone.View.extend({
         "click a.back": "back"
     },
     render: function(){
+    	//Triggers the model refresh to be pased to the view
+    	this.model.change();
+    	//Show the view
     	App.view.changePage(this);
     	return this;
     },
