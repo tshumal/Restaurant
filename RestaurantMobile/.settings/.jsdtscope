@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="lib/jquery-1.7.1.min.js|lib/jquery.mobile-1.1.1.min.js" kind="src" path="www"/>
+	<classpathentry excluding="lib/" kind="src" path="www"/>
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.WebProject">
 		<attributes>

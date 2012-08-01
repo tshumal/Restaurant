@@ -7,7 +7,7 @@
 <div data-role="content">
 	<ul id="reserveList" data-role="listview" data-inset="true" data-filter="true">
 		<% model.each(function(item) { %>						
-			<li><a href="#reserves/<%= item.id %>"><h1>Reserve <%= item.get('name') %></h1><p><%= item.get('date_format') %></p></a></li>
+			<li><a href="#reserves/<%= item.id %>"><h1>Reserve <%= item.get('store').name %></h1><p><%= item.get('date_format') %></p></a></li>
       	<% }); %>
 	</ul>
 	<a href="#reserves/add" data-role="button" data-icon="add">Add Reserve</a>
