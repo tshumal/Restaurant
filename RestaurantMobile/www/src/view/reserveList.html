@@ -1,0 +1,14 @@
+<div data-role="header" data-position="fixed" data-tap-toggle="false">
+	<h2>Reservations</h2>
+	<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
+	<a href="#" data-icon="back" class="back" data-iconpos="notext">Back</a>
+</div>
+
+<div data-role="content">
+	<ul id="reserveList" data-role="listview" data-inset="true" data-filter="true">
+		<% model.each(function(item) { %>						
+			<li><a href="#reserves/<%= item.id %>"><h1>Reserve <%= item.get('name') %></h1><p><%= item.get('date') %></p></a></li>
+      	<% }); %>
+	</ul>
+	<a href="#reserves/add" data-role="button" data-icon="add">Add Reserve</a>
+</div>

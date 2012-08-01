@@ -1,5 +1,18 @@
 //Principal object of the application
 var App = App || {};
+//Initialize config properties
+App.config = App.config || {
+
+    // Hash of preloaded properties for the app
+    properties:{'serverURL':'http://192.168.0.107:8080/RestaurantServer/rest/api/',
+    			'property2':'value2',
+    			'property3':'value3'},
+
+    // Get Property by Name from hash of preloaded properties
+    getProperty:function (name) {    	
+        return this.properties[name];
+    }
+};
 //Initialize principal children
 App.controller = App.controller || {};
 App.model = App.model || {};
@@ -86,7 +99,7 @@ App.router = Backbone.Router.extend({
     	var model = new App.model.Store({id:id});        
         model.fetch({dataType : 'jsonp',
             success:function (data) {
-                new App.controller.StoreView({model:data});
+                new App.controller.StoreDetail({model:data});
             },
         	error:function(data){
         		console.log("Error App.model.Store: id[" + id + ']');
@@ -103,7 +116,7 @@ App.router = Backbone.Router.extend({
 
 $(document).ready(function () {
 	//Preloads every single HTML view, and then starts the application.
-    App.view.loadViews(['storeList','storeView'],
+    App.view.loadViews(['storeList','storeDetail'],
         function () {
     		app = new App.router();
             Backbone.history.start();

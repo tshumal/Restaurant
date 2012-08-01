@@ -1,6 +1,6 @@
 App.model.Store = Backbone.Model.extend({
 
-    urlRoot:"http://localhost:8080/RestaurantServer/rest/api/stores/",
+    urlRoot: App.config.getProperty('serverURL')+"stores/",
     
     defaults: {
     	id : 0,
@@ -21,6 +21,6 @@ App.collection.StoreCollection = Backbone.Collection.extend({
 
     model:App.model.Store,
 
-    url:"http://localhost:8080/RestaurantServer/rest/api/stores"
+    url:App.config.getProperty('serverURL')+"stores"
 
 });
