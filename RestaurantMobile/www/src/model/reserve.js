@@ -14,7 +14,13 @@ App.model.Reserve = Backbone.Model.extend({
     		var date = new Date(this.get('date'));
     		this.set({"date_format":date.getDate() + "/" + (date.getMonth() + 1)+ "/" + date.getFullYear()});
         });
-    }
+    },
+    
+    validate: function( attributes ){    	
+        if( this.attributes.numPeople < 0 || this.attributes.numPeople > 5 ){
+            return "Number of People must be between 0 and 5";
+        }
+    },
 });
 
 App.collection.ReserveCollection = Backbone.Collection.extend({

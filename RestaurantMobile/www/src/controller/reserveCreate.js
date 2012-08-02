@@ -26,5 +26,7 @@ App.controller.ReserveCreate = Backbone.View.extend({
     	console.log('year: ' + this.$('#date-year').val());
     	var date = new Date(this.$('#date-year').val(), this.$('#date-month').val(), this.$('#date-day').val());
     	console.log(date);
+    	this.model.set({'numPeople':this.$('#numPeople').val()});
+    	console.log(this.model.validate());
     }
 });
