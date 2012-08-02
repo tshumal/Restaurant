@@ -3,13 +3,13 @@ $(document).on("pageinit",":jqmData(role='page')", function(){
 	$(":jqmData(slidemenu)").addClass('slidemenu_btn');
 	var sm = $($(":jqmData(slidemenu)").data('slidemenu'));
 	sm.addClass('slidemenu');
-
+	/*
 	$(document).on("swipeleft",":jqmData(role='page')", function(){
 		slidemenu(sm);
 	});
 	$(document).on("swiperight",":jqmData(role='page')", function(){
 		slidemenu(sm);
-	});
+	});*/
 	$(document).on("click", ":jqmData(slidemenu)", function(event) {
 		event.stopImmediatePropagation();
 		slidemenu(sm);

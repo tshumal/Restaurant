@@ -1,5 +1,5 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">		
-	<h2>Create Reserve</h2>
+	<h2>Update Reserve</h2>
 	<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
 	<a href="#" data-icon="back" class="back" data-iconpos="notext">Back</a>
 </div>		
@@ -9,28 +9,29 @@
 	<div data-role="fieldcontain">
 		<label for="numPeople"><b>People</b></label>
 		<input type="range" id="numPeople" value="<%= model.get('numPeople') %>" min="0" max="10" />
-	</div>	
+	</div>
 	<div data-role="fieldcontain">
 		<fieldset data-role="controlgroup" data-type="horizontal">
 			<legend><b>Reserve Date</b></legend>
-			<label for="date-month">Month</label>
-			<select id="date-month">
-				<option value="0">Jan</option>				
-				<option value="1">Feb</option>
-				<option value="2">Mar</option>
-				<option value="3">Apr</option>
-				<option value="4">May</option>
-				<option value="5">Jun</option>
-				<option value="6">Jul</option>
-				<option value="7">Aug</option>
-				<option value="8">Sep</option>
-				<option value="9">Oct</option>
-				<option value="10">Nov</option>
-				<option value="11">Dec</option>
+			<label for="select-choice-month">Month</label>
+			<select 	id="select-choice-month">
+				<option value="jan">Jan</option>
+				<option value="dec">Dec</option>
+				<option value="feb">Feb</option>
+				<option value="mar">Mar</option>
+				<option value="apr">Apr</option>
+				<option value="may">May</option>
+				<option value="jun">Jun</option>
+				<option value="jul">Jul</option>
+				<option value="aug">Aug</option>
+				<option value="sep">Sep</option>
+				<option value="oct">Oct</option>
+				<option value="nov">Nov</option>
+				<option value="dec">Dec</option>
 			</select>
 	
-			<label for="date-day">Day</label>
-			<select id="date-day">
+			<label for="select-choice-day">Day</label>
+			<select name="select-choice-day" id="select-choice-day">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -47,8 +48,8 @@
 				<option value="15">15</option>
 			</select>
 	
-			<label for="date-year">Year</label>
-			<select id="date-year">
+			<label for="select-choice-year">Year</label>
+			<select name="select-choice-year" id="select-choice-year">
 				<option value="2011">2012</option>
 				<option value="2011">2011</option>
 				<option value="2010">2010</option>
@@ -62,8 +63,8 @@
 		</fieldset>
 	</div>
 	<div data-role="fieldcontain">
-	    <label for="store"><b>Store</b></label>
-		<select id="store">
+	    <label for="selectStore"><b>Store</b></label>
+		<select id="selectStore">
 			<option>Select Store</option>
 			<option value="1">Galerias</option>
 			<option value="2">Nicolas Federman</option>						

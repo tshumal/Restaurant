@@ -4,7 +4,7 @@ var App = App || {};
 App.config = App.config || {
 
     // Hash of preloaded properties for the app
-    properties:{'serverURL':'http://192.168.0.100:8080/RestaurantServer/rest/api/',
+    properties:{'serverURL':'http://192.168.0.107:8080/RestaurantServer/rest/api/',
     			'property2':'value2',
     			'property3':'value3'},
 
@@ -71,6 +71,8 @@ App.router = Backbone.Router.extend({
     	"stores":"stores",
     	"stores/:id":"store",
     	"reserves":"reserves",
+    	"reserves/create":"reserveCreate",
+    	"reserves/update/:id":"reserveUpdate",
     	"reserves/:id":"reserve",
     	"*actions":"defaultRoute"
     },
@@ -135,6 +137,25 @@ App.router = Backbone.Router.extend({
         });
     },
     
+    reserveCreate : function () {
+    	//Initialize the Info   
+    	var model = new App.model.Reserve();        
+    	new App.controller.ReserveCreate({model:model});
+    },
+    
+    reserveUpdate : function (id) {
+    	//Initialize the Info   
+    	var model = new App.model.Reserve({id:id});        
+        model.fetch({dataType : 'jsonp',
+            success:function (data) {
+                new App.controller.ReserveUpdate({model:data});
+            },
+        	error:function(data){
+        		console.log("Error App.model.Reserve: id[" + id + ']');
+        	}
+        });
+    },
+    
     //Every page that not match the router will go to the homePage
     defaultRoute : function () {
     	var transition = $.mobile.defaultPageTransition;
@@ -144,7 +165,8 @@ App.router = Backbone.Router.extend({
 
 $(document).ready(function () {
 	//Preloads every single HTML view, and then starts the application.
-    App.view.loadViews(['storeList','storeDetail','reserveList','reserveDetail'],
+    App.view.loadViews(['storeList','storeDetail',
+                        'reserveList','reserveDetail','reserveCreate','reserveUpdate'],
         function () {
     		app = new App.router();
             Backbone.history.start();

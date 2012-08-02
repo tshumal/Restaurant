@@ -20,6 +20,8 @@
         <script src="src/controller/storeDetail.js"></script>
         <script src="src/controller/reserveList.js"></script>
         <script src="src/controller/reserveDetail.js"></script>
+        <script src="src/controller/reserveCreate.js"></script>
+        <script src="src/controller/reserveUpdate.js"></script>        
         <!-- Load Models -->
         <script src="src/model/store.js"></script>
         <script src="src/model/reserve.js"></script>
@@ -35,113 +37,14 @@
 				<li><a href="#stores" data-icon="home">Stores</a></li>
 			</ul>
 		</div>
-    
 		<div data-role="page" id ="home">			
 			<div data-role="header" data-position="fixed" data-tap-toggle="false">
 				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
 				<h1>Restaurant</h1>
-			</div>
-		
+			</div>		
 			<div data-role="content">
 				
 			</div>
 		</div>
-		
-		<div data-role="page" id ="addReserve">
-			<div data-role="header" data-position="fixed" data-tap-toggle="false">		
-				<h2>Add Reserve</h2>
-				<a href="#" data-slidemenu="#slidemenu" data-slideopen="false" data-icon="smico" data-corners="false" data-iconpos="notext">Menu</a>
-				<a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Back</a>
-			</div>
-		
-			<div data-role="content">
-				<form action="#" method="get">
-				<div data-role="fieldcontain">
-				    <label for="addNumPeople"><b>People</b></label>
-				    <select name="select-sucursal" id="addNumPeople">
-						<option>Select Number</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>						
-					</select>
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<legend><b>Reserve Date</b></legend>
-						<label for="select-choice-month">Month</label>
-						<select name="select-choice-month" id="select-choice-month">
-							<option value="jan">Jan</option>
-							<option value="dec">Dec</option>
-							<option value="feb">Feb</option>
-							<option value="mar">Mar</option>
-							<option value="apr">Apr</option>
-							<option value="may">May</option>
-							<option value="jun">Jun</option>
-							<option value="jul">Jul</option>
-							<option value="aug">Aug</option>
-							<option value="sep">Sep</option>
-							<option value="oct">Oct</option>
-							<option value="nov">Nov</option>
-							<option value="dec">Dec</option>
-						</select>
-				
-						<label for="select-choice-day">Day</label>
-						<select name="select-choice-day" id="select-choice-day">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">13</option>
-							<option value="13">14</option>
-							<option value="15">15</option>
-						</select>
-				
-						<label for="select-choice-year">Year</label>
-						<select name="select-choice-year" id="select-choice-year">
-							<option value="2011">2012</option>
-							<option value="2011">2011</option>
-							<option value="2010">2010</option>
-							<option value="2009">2009</option>
-							<option value="2008">2008</option>
-							<option value="2007">2007</option>
-							<option value="2006">2006</option>
-							<option value="2005">2005</option>
-							<option value="2004">2004</option>
-						</select>
-					</fieldset>
-				</div>
-				<div data-role="fieldcontain">
-				    <label for="add-select-store"><b>Store</b></label>
-					<select name="select-sucursal" id="add-select-store" data-native-menu="false">
-						<option>Select Store</option>
-						<option value="1">Galerias</option>
-						<option value="2">Nicolas Federman</option>						
-					</select>
-				</div>
-				<a id="addReserveBtn" href="#reserves" data-role="button" data-icon="check">Save Reserve</a>
-				</form>
-			</div>
-			
-			<div data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
-				<div data-role="navbar" data-iconpos="bottom">
-					<ul>
-						<li><a href="#menu" data-icon="grid">Menu</a></li>
-						<li><a href="#orders" data-icon="star">Orders</a></li>
-						<li><a href="#reserves" data-icon="check" class="ui-btn-active">Reserves</a></li>
-						<li><a href="#stores" data-icon="home">Stores</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		
-		
 	</body>    
 </html>
