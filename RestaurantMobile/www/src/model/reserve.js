@@ -17,8 +17,8 @@ App.model.Reserve = Backbone.Model.extend({
     },
     
     validate: function( attributes ){    	
-        if( this.attributes.numPeople < 0 || this.attributes.numPeople > 5 ){
-            return "Number of People must be between 0 and 5";
+        if( this.attributes.numPeople < 0 || this.attributes.numPeople > 10 ){
+            return "Number of People must be between 0 and 10";
         }
     },
 });

@@ -4,7 +4,7 @@ var App = App || {};
 App.config = App.config || {
 
     // Hash of preloaded properties for the app
-    properties:{'serverURL':'http://157.253.70.95:8080/RestaurantServer/rest/api/',
+    properties:{'serverURL':'http://192.168.0.107:8080/RestaurantServer/rest/api/',
     			'property2':'value2',
     			'property3':'value3'},
 

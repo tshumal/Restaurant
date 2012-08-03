@@ -4,11 +4,11 @@
 	<a href="#" data-icon="back" class="back" data-iconpos="notext">Back</a>
 </div>		
 <div data-role="content">
-	<form action="#" method="get">
-	
-	<div data-role="fieldcontain">
+	<form id="frm" action="#" method="get">	
+	<div data-role="fieldcontain">		
 		<label for="numPeople"><b>People</b></label>
 		<input type="range" id="numPeople" value="<%= model.get('numPeople') %>" min="0" max="10" />
+		<label for="numPeople" class="error">Please enter a valid email address.</label>		
 	</div>	
 	<div data-role="fieldcontain">
 		<fieldset data-role="controlgroup" data-type="horizontal">
@@ -62,12 +62,13 @@
 		</fieldset>
 	</div>
 	<div data-role="fieldcontain">
-	    <label for="store"><b>Store</b></label>
+	    <label for="store"><b>Store</b></label>	    
 		<select id="store">
 			<option>Select Store</option>
 			<option value="1">Galerias</option>
 			<option value="2">Nicolas Federman</option>						
 		</select>
+		<label for="store" class="error" style="margin-top:1px;">Please enter a valid email address.</label>
 	</div>
 	<a class="save" href="#reserves" data-role="button" data-icon="check">Save Reserve</a>
 	</form>

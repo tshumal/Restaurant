@@ -1,0 +1,24 @@
+label.error { 
+	padding: .3em; 
+	border: 2px solid #ddd; 
+	background: #FBE3E4; 
+	color: #D12F19; 
+	border-color: #FBC2C4;
+	margin-top: 2px !important;
+	margin-bottom: 2px !important; 
+}
+
+@media screen and (orientation: portrait){
+    label.error { 
+    	margin-left: 0 !important; 
+    	display: block !important;
+    }
+}
+
+@media screen and (orientation: landscape){
+    label.error { 
+    	display: inline-block !important; 
+    	margin-left: 22% !important; 
+    	width: 60% !important;
+    }
+}
