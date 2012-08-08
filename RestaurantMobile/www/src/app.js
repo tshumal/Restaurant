@@ -1,16 +1,46 @@
 //Principal object of the application
 var App = App || {};
-//Initialize config properties
-App.config = App.config || {
+//Initialize utils
+App.utils = App.utils || {
 
     // Hash of preloaded properties for the app
-    properties:{'serverURL':'http://192.168.0.107:8080/RestaurantServer/rest/api/',
+    properties:{'serverURL':'http://192.168.0.100:8080/RestaurantServer/rest/api/',
     			'property2':'value2',
     			'property3':'value3'},
 
     // Get Property by Name from hash of preloaded properties
     getProperty:function (name) {    	
         return this.properties[name];
+    },
+    
+    //Display Validation errors in a specific form
+    displayValidationErrors: function (messages) {
+    	//Remove all existing validation errors
+    	$('label.error').remove();
+    	//Check for actual errors to show
+        for (var key in messages) {
+            if (messages.hasOwnProperty(key)) {
+                this.addValidationError(key, messages[key]);
+            }
+        }
+    },
+
+    //Display Validation error in a specific field
+    addValidationError: function (field, message) {
+    	//Removes all existing validation errors in the field
+    	this.removeValidationError(field);
+    	//Select the input with the error
+        var input = $('#'+field).parent();
+        //Add a label error with the desired message
+        var html = '<label for=\"'+field+'\" class=\"error\">'+message+'</label>';
+        input.append(html);
+    },
+
+    //Remove Validation error in a specific field
+    removeValidationError: function (field) {
+    	//Remove the label error in the selected input
+    	var input = $('#'+field).parent();
+    	$('label.error', input).remove();
     }
 };
 //Initialize principal children
@@ -64,7 +94,7 @@ App.view = App.view || {
     	$.mobile.changePage($(page.el), {changeHash:false, transition: transition});    	
     }
 };
-
+//Principal router of the application that handles the navigation purposes of the Application
 App.router = Backbone.Router.extend({
 
     routes:{
@@ -76,7 +106,7 @@ App.router = Backbone.Router.extend({
     	"reserves/:id":"reserve",
     	"*actions":"defaultRoute"
     },
-
+    
     initialize:function () {
         $('.back').live('click', function(event) {
             window.history.back();
@@ -163,6 +193,7 @@ App.router = Backbone.Router.extend({
     }
 });
 
+//Entry Point of the Application
 $(document).ready(function () {
 	//Preloads every single HTML view, and then starts the application.
     App.view.loadViews(['storeList','storeDetail',
