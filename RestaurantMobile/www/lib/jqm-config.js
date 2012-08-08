@@ -9,7 +9,7 @@ $(document).bind("mobileinit", function(){
     $.mobile.hashListeningEnabled = false;
     $.mobile.pushStateEnabled = false;
     //Remove page from DOM when it's being replaced
-    $("div:jqmData(role='page')").on('pagehide', function (event, ui) {
-	    $(event.currentTarget).remove();
-	});
+    $('div').live('pageshow',function(event, ui){
+    	  $(ui.prevPage).remove();
+    });
 });
