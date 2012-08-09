@@ -92,6 +92,24 @@ App.view = App.view || {
     	// JQuery Mobile Change Page
         var transition = $.mobile.defaultPageTransition;    	
     	$.mobile.changePage($(page.el), {changeHash:false, transition: transition});    	
+    },
+    
+    //Render a date, specifically the related days with the selected year and month.    
+    renderDate:function(fieldName) {
+    	var year = $('#'+fieldName+'-year').val();
+		var month = $('#'+fieldName+'-month').val();
+		var days = 0;
+		if (year == '' || month == '')
+			days = 31;
+		else{
+			var dd = new Date(year, month, 0);
+    		days = dd.getDate();
+		}			
+		var options = $('#'+fieldName+'-day').prop('options');
+		options.length = 0;
+		options[options.length] = new Option('DD','');
+		for (var i = 1; i <= days; i++)
+			options[options.length] = new Option(i,i);
     }
 };
 //Principal router of the application that handles the navigation purposes of the Application

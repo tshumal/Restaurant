@@ -16,6 +16,8 @@ App.controller.ReserveCreate = Backbone.View.extend({
     	this.model.change();
     	//Show the view
     	App.view.changePage(this);
+    	//Render the date field
+    	App.view.renderDate('date');
     	return this;
     },
     back: function(){
@@ -27,7 +29,10 @@ App.controller.ReserveCreate = Backbone.View.extend({
         var change = {};
         change[target.id] = target.value;
         this.model.set(change);
-
+        
+        //Refresh the date field
+    	App.view.renderDate('date');
+        
         // Run validation rule (if any) on changed item
         var check = this.model.validateItem(target.id);
         if (check.isValid === false) {
@@ -36,7 +41,8 @@ App.controller.ReserveCreate = Backbone.View.extend({
         	App.utils.removeValidationError(target.id);
         }
     },
-    save: function(){
+    save: function(){    	
+    	
     	console.log('month: ' + this.$('#date-month').val());
     	console.log('day: ' + this.$('#date-day').val());
     	console.log('year: ' + this.$('#date-year').val());
