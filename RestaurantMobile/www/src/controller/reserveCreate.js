@@ -16,39 +16,48 @@ App.controller.ReserveCreate = Backbone.View.extend({
     	this.model.change();
     	//Show the view
     	App.view.changePage(this);
-    	//Render the date field
-    	App.view.renderDate('date');
+    	//Render the date field with the initial value
+    	App.view.renderDate('date', 2012, 2030, this.model.get('date'));
     	return this;
     },
+    //Fired when the user select back in his browser
     back: function(){
     	window.history.back();
     },
+    //Fired when there is a change event on the view
     change: function (event) {
-        // Apply the change to the model
+    	// Apply the change to the model
         var target = event.target;
         var change = {};
-        change[target.id] = target.value;
+        var name = target.id;
+        change[name] = target.value;
+        //The model attribute is set
         this.model.set(change);
         
         //Refresh the date field
-    	App.view.renderDate('date');
+    	App.view.renderDate('date', 2012, 2030);
+        
+        //If the event corresponds to a date type 
+        //the target will be replaced for the attribute name
+        //so the complete field will be validated
+        if (name.indexOf("-year") != -1 ||
+        		name.indexOf("-month") != -1 ||
+        		name.indexOf("-day") != -1){
+        	//name is now the model name
+        	name = 'date';
+        }
         
         // Run validation rule (if any) on changed item
-        var check = this.model.validateItem(target.id);
+        var check = this.model.validateItem(name);
         if (check.isValid === false) {
-        	App.utils.addValidationError(target.id, check.message);
+        	App.utils.addValidationError(name, check.message);
         } else {
-        	App.utils.removeValidationError(target.id);
+        	App.utils.removeValidationError(name);
         }
     },
-    save: function(){    	
-    	
-    	console.log('month: ' + this.$('#date-month').val());
-    	console.log('day: ' + this.$('#date-day').val());
-    	console.log('year: ' + this.$('#date-year').val());
-    	var date = new Date(this.$('#date-year').val(), this.$('#date-month').val(), this.$('#date-day').val());
-    	console.log(date);
-    	
+    //Fired to save a reserve recently created
+    save: function(){
+    	//Run validation on all the model if it passes the model will be saved
     	var check = this.model.validateAll();
         if (check.isValid === false) {
         	App.utils.displayValidationErrors(check.messages);

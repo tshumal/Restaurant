@@ -4,7 +4,7 @@ var App = App || {};
 App.utils = App.utils || {
 
     // Hash of preloaded properties for the app
-    properties:{'serverURL':'http://192.168.0.100:8080/RestaurantServer/rest/api/',
+    properties:{'serverURL':'http://157.253.70.95:8080/RestaurantServer/rest/api/',
     			'property2':'value2',
     			'property3':'value3'},
 
@@ -95,21 +95,37 @@ App.view = App.view || {
     },
     
     //Render a date, specifically the related days with the selected year and month.    
-    renderDate:function(fieldName) {
+    renderDate:function(fieldName, initialYear, finalYear, initialDate) {
     	var year = $('#'+fieldName+'-year').val();
-		var month = $('#'+fieldName+'-month').val();
+    	var month = $('#'+fieldName+'-month').val();
+    	var day = $('#'+fieldName+'-day').val();
+		
 		var days = 0;
 		if (year == '' || month == '')
 			days = 31;
 		else{
-			var dd = new Date(year, month, 0);
-    		days = dd.getDate();
-		}			
+			var date = new Date(year, month, 0);
+    		days = date.getDate();    		
+		}
+			
 		var options = $('#'+fieldName+'-day').prop('options');
 		options.length = 0;
 		options[options.length] = new Option('DD','');
+		//The day options are generated every time something changes
+		//But the option selected previously is set again
 		for (var i = 1; i <= days; i++)
-			options[options.length] = new Option(i,i);
+			options[options.length] = new Option(i,i,(day == i)? true : false);
+		
+		//If the initial date is set, it will be selected on the select menus
+    	if (initialDate != null){
+    		$('#'+fieldName+'-year').val(initialDate.getFullYear());
+    		$('#'+fieldName+'-month').val(initialDate.getMonth() + 1);
+    		$('#'+fieldName+'-day').val(initialDate.getDate());
+    		
+    		$('#'+fieldName+'-year').selectmenu('refresh');
+    		$('#'+fieldName+'-month').selectmenu('refresh');
+    		$('#'+fieldName+'-day').selectmenu('refresh');
+    	}
     }
 };
 //Principal router of the application that handles the navigation purposes of the Application

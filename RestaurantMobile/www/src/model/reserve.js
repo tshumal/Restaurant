@@ -1,7 +1,9 @@
+//Represents a Reserve
 App.model.Reserve = Backbone.Model.extend({
-
-    urlRoot: App.utils.getProperty('serverURL')+"reserves/",
-    
+	
+	urlRoot: App.utils.getProperty('serverURL')+"reserves/",
+	
+	//Default values for the Reserve
     defaults: {
     	id : 0,
         numPeople: 0,
@@ -9,19 +11,58 @@ App.model.Reserve = Backbone.Model.extend({
         store: null,
     },    
     
+    //Constructor of the model
     initialize:function () {
     	this.validators();    	
     	this.bind("change:date", function(){
     		var date = new Date(this.get('date'));
-    		this.set({"date_format":date.getDate() + "/" + (date.getMonth() + 1)+ "/" + date.getFullYear()});
+    		this.set({"date-format":date.getDate() + "/" + (date.getMonth() + 1)+ "/" + date.getFullYear()});
         });
+    	this.bind("change:date-year", function(){
+    		this.setDate();
+        });
+    	this.bind("change:date-month", function(){
+    		this.setDate();
+        });
+    	this.bind("change:date-day", function(){
+    		this.setDate();
+        });
+    	
     },
     
+    //Set a valid date if the model is complete with the three attributes year month and day
+    //If the three attributes are not set
+    //The date should be null because it means the date is being edited
+    setDate: function(){
+    	//Obtains the three attributes
+    	var year = this.get('date-year');
+    	var month = this.get('date-month');
+    	var day = this.get('date-day');  	
+    	//If the date attributes are set.
+    	if (year != null && year != '' 
+    			&& month != null && month != ''
+    			&& day != null && day != ''){
+    		var sdate = new Date(year, parseInt(month) - 1, day);
+    		this.set({date : sdate});
+    	}
+    	//If not the date should be null
+    	else{
+    		this.set({date : null});
+    	}	
+    },
+    
+    //Define the field validators
     validators: function(){
         this.validators = {};
         this.validators.numPeople = function (value) {
             if (value < 1 || value > 10 )
             	return {isValid: false, message: "You must enter a valid number of people"};
+            else
+            	return {isValid: true}; 
+        };
+        this.validators.date = function (value) {
+            if (value == null )
+            	return {isValid: false, message: "You must enter a valid date"};
             else
             	return {isValid: true}; 
         };
@@ -47,9 +88,10 @@ App.model.Reserve = Backbone.Model.extend({
     }
 });
 
+//Represent a Collection of Reserves
 App.collection.ReserveCollection = Backbone.Collection.extend({
 
-    model:App.model.Reserve,
+	model:App.model.Reserve,
 
     url:App.utils.getProperty('serverURL')+"reserves",
     

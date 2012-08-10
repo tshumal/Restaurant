@@ -7,10 +7,10 @@
 	<form id="frm" action="#" method="get">	
 	<div data-role="fieldcontain">		
 		<label for="numPeople"><b>People</b></label>
-		<input type="range" id="numPeople" value="<%= model.get('numPeople') %>" min="0" max="10" />
+		<input type="range" id="numPeople" value="<%= model.get('numPeople') %>" min="0" max="10" />		
 	</div>	
 	<div data-role="fieldcontain">
-		<fieldset data-role="controlgroup" data-type="horizontal">
+		<fieldset id="date" data-role="controlgroup" data-type="horizontal">
 			<legend><b>Reserve Date</b></legend>
 			<label for="date-year">Year</label>
 			<select id="date-year">
@@ -33,13 +33,13 @@
 				<option value="10">Oct</option>
 				<option value="11">Nov</option>
 				<option value="12">Dec</option>
-			</select>
-	
+			</select>	
 			<label for="date-day">Day</label>
 			<select id="date-day">
 				<option value="">DD</option>
-			</select>			
+			</select>	
 		</fieldset>
+		
 	</div>
 	<div data-role="fieldcontain">
 	    <label for="store"><b>Store</b></label>	    
