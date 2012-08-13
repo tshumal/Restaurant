@@ -4,7 +4,7 @@ App.controller.ReserveCreate = Backbone.View.extend({
     	// Compile the template using underscore
         this.view = _.template(App.view.get('reserveCreate'));
         this.model.bind("reset", this.render, this);
-        this.render();
+        this.render();        
     },
     events: {
     	"change"      : "change",

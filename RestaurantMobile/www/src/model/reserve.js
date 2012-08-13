@@ -4,22 +4,22 @@ App.model.Reserve = Backbone.Model.extend({
 	urlRoot: App.utils.getProperty('serverURL')+"reserves/",
 	
 	//Default values for the Reserve
-    defaults: {
+    defaults: {    	
     	id : 0,
         numPeople: 0,
-        date: new Date(),
-        store: null,
-    },    
+        date: new Date(),        
+        store: null
+    },
     
     //Constructor of the model
     initialize:function () {
-    	this.validators();    	
+    	this.validators();
+    	this.changeDate();
     	this.bind("change:date", function(){
-    		var date = new Date(this.get('date'));
-    		this.set({"date-format":date.getDate() + "/" + (date.getMonth() + 1)+ "/" + date.getFullYear()});
+    		this.changeDate();
         });
     	this.bind("change:date-year", function(){
-    		this.setDate();
+    		this.setDate();    		
         });
     	this.bind("change:date-month", function(){
     		this.setDate();
@@ -27,17 +27,28 @@ App.model.Reserve = Backbone.Model.extend({
     	this.bind("change:date-day", function(){
     		this.setDate();
         });
-    	
+    },
+    
+    //Used to initialize the date related values year, month, day and format
+    //Every time the date changes they are refreshed
+    changeDate:function (){
+    	if (this.get('date') != null){
+			var date = new Date(this.get('date'));
+			this.set({"date-format":date.getDate() + "/" + (date.getMonth() + 1)+ "/" + date.getFullYear()});
+    		this.set({"date-year" : date.getFullYear()});
+        	this.set({"date-month" : date.getMonth() + 1});
+        	this.set({"date-day" : date.getDate()});
+    	}	
     },
     
     //Set a valid date if the model is complete with the three attributes year month and day
-    //If the three attributes are not set
-    //The date should be null because it means the date is being edited
+    //If the three attributes are not set the 
+    //date should be null because it means the date is being edited
     setDate: function(){
     	//Obtains the three attributes
     	var year = this.get('date-year');
     	var month = this.get('date-month');
-    	var day = this.get('date-day');  	
+    	var day = this.get('date-day');
     	//If the date attributes are set.
     	if (year != null && year != '' 
     			&& month != null && month != ''

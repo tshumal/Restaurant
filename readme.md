@@ -7,3 +7,4 @@ Mobile Application Based on HTML5 Using [JQuery Mobile](http://jquerymobile.com/
 Credits:
 ==============================================
 [jQuery Mobile Slide Menu by tegansnyder](https://github.com/tegansnyder/JQuery-Mobile-Slide-Menu)
+[Wine Cellar by ccoenraets](https://github.com/ccoenraets/backbone-cellar)

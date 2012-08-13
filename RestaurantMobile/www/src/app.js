@@ -4,7 +4,7 @@ var App = App || {};
 App.utils = App.utils || {
 
     // Hash of preloaded properties for the app
-    properties:{'serverURL':'http://157.253.70.95:8080/RestaurantServer/rest/api/',
+    properties:{'serverURL':'http://192.168.0.109:8080/RestaurantServer/rest/api/',
     			'property2':'value2',
     			'property3':'value3'},
 
@@ -99,33 +99,61 @@ App.view = App.view || {
     	var year = $('#'+fieldName+'-year').val();
     	var month = $('#'+fieldName+'-month').val();
     	var day = $('#'+fieldName+'-day').val();
-		
-		var days = 0;
+    	
+    	var days = 0;
 		if (year == '' || month == '')
 			days = 31;
 		else{
-			var date = new Date(year, month, 0);
-    		days = date.getDate();    		
+			if (day != ''){
+				//Initializes the date object, 
+				//with day the month should be provided since 0 to 11
+				var date = new Date(year, month-1, day);
+				//Set the selected values for a valid date
+				year = date.getFullYear();
+				month = date.getMonth() + 1;
+				day = date.getDate();
+			}
+			//Obtains the number of days by a given year and month
+			//the month should be provided since 1 to 12
+			date = new Date(year, month, 0);
+    		days = date.getDate();
 		}
 			
-		var options = $('#'+fieldName+'-day').prop('options');
-		options.length = 0;
-		options[options.length] = new Option('DD','');
+		var dayOptions = $('#'+fieldName+'-day').prop('options');
+		dayOptions.length = 0;
+		dayOptions[dayOptions.length] = new Option('DD','');
 		//The day options are generated every time something changes
-		//But the option selected previously is set again
 		for (var i = 1; i <= days; i++)
-			options[options.length] = new Option(i,i,(day == i)? true : false);
+			dayOptions[dayOptions.length] = new Option(i,i);
+		
+		var yearOptions = $('#'+fieldName+'-year').prop('options');
+		yearOptions.length = 0;
+		yearOptions[yearOptions.length] = new Option('YY','');
+		//The year options are generated every time something changes
+		//The expected values are between the initial and final year 
+		for (var i = initialYear; i <= finalYear; i++)
+			yearOptions[yearOptions.length] = new Option(i,i);
 		
 		//If the initial date is set, it will be selected on the select menus
     	if (initialDate != null){
     		$('#'+fieldName+'-year').val(initialDate.getFullYear());
     		$('#'+fieldName+'-month').val(initialDate.getMonth() + 1);
     		$('#'+fieldName+'-day').val(initialDate.getDate());
-    		
-    		$('#'+fieldName+'-year').selectmenu('refresh');
-    		$('#'+fieldName+'-month').selectmenu('refresh');
-    		$('#'+fieldName+'-day').selectmenu('refresh');
     	}
+    	//If not the previous selected value is set again if it exists in the predefines values
+    	else{
+    		//Search for the value in the options of the select
+    		var yearExists = 0 != $('#'+fieldName+'-year option[value='+year+']').length;
+    		var dayExists = 0 != $('#'+fieldName+'-day option[value='+day+']').length;
+    		//Set the previous values
+    		$('#'+fieldName+'-year').val((yearExists)?year:'');
+    		$('#'+fieldName+'-month').val(month);
+    		$('#'+fieldName+'-day').val((dayExists)?day:'');
+    	}
+    	//Refresh the select menus to show the selected values
+    	$('#'+fieldName+'-year').selectmenu('refresh');
+		$('#'+fieldName+'-month').selectmenu('refresh');
+		$('#'+fieldName+'-day').selectmenu('refresh');
     }
 };
 //Principal router of the application that handles the navigation purposes of the Application
@@ -203,7 +231,7 @@ App.router = Backbone.Router.extend({
     
     reserveCreate : function () {
     	//Initialize the Info   
-    	var model = new App.model.Reserve();        
+    	var model = new App.model.Reserve();
     	new App.controller.ReserveCreate({model:model});
     },
     
