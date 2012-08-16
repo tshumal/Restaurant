@@ -62,4 +62,14 @@ public class Reserve {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("id["+id+"]");
+		builder.append("store["+store+"]");
+		builder.append("numPeople["+numPeople+"]");
+		builder.append("date["+date+"]");
+		return builder.toString();
+	}
 }

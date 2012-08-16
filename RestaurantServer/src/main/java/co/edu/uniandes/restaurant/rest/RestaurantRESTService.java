@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -52,15 +53,15 @@ public class RestaurantRESTService {
    
    @POST
    @Path("/reserves")
+   @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
-   public Response addReserve(@QueryParam("numPeople") int numPeople, 
-		   				  @QueryParam("idStore") int idStore,
-		   				  @QueryParam("date") String date){
+   public Response addReserve(Reserve reserve){
 	   try{
-		   controller.addReserve(numPeople, idStore, date);
+		   System.out.println("reserve: " + reserve.toString());
+		   controller.addReserve(0, 0, null);
 		   return Response.ok().build();
 	   }
-	   catch (Exception e) {
+	   catch (Exception e) {		   
 		   return Response.serverError().build();
 	   }
    }

@@ -83,4 +83,17 @@ public class Store {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("id["+id+"]");
+		builder.append("name["+name+"]");
+		builder.append("phone["+phone+"]");
+		builder.append("address["+address+"]");
+		builder.append("latitude["+latitude+"]");
+		builder.append("longitude["+longitude+"]");
+		builder.append("image["+image+"]");
+		return builder.toString();
+	}
 }

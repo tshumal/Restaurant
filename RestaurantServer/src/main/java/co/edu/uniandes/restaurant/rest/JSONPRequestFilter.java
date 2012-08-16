@@ -58,6 +58,8 @@ public class JSONPRequestFilter implements Filter {
         
         if (!isJSONPRequest(callback)) {
             //Request is not a JSONP request move on
+        	httpResponse.addHeader("Access-Control-Allow-Origin", "*");
+        	httpResponse.addHeader("Access-Control-Allow-Credentials", "true");
             chain.doFilter(request, response);
         }else{
             //Need to check if the callback method is safe
