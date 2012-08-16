@@ -4,7 +4,7 @@ App.controller.ReserveCreate = Backbone.View.extend({
     	// Compile the template using underscore
         this.view = _.template(App.view.get('reserveCreate'));
         this.model.bind("reset", this.render, this);
-        this.render();        
+        this.render();
     },
     events: {
     	"change"      : "change",
@@ -14,7 +14,11 @@ App.controller.ReserveCreate = Backbone.View.extend({
     render: function(){
     	//Triggers the model refresh to be passed to the view
     	this.model.change();
-    	//Show the view
+    	//Renders the view with the associated elements
+        $(this.el).html( this.view({
+        	model:this.model,
+        	stores:this.options.stores}) );
+    	//Show the view using JQueryMobile
     	App.view.changePage(this);
     	//Render the date field with the initial value
     	App.view.renderDate('date', 2012, 2030, this.model.get('date'));
@@ -32,9 +36,8 @@ App.controller.ReserveCreate = Backbone.View.extend({
         var name = target.id;
         change[name] = target.value;
         //The model attribute is set
-        this.model.set(change);
-        
-        //Refresh the date field
+        this.model.set(change);        
+        //Refresh the dates fields
     	App.view.renderDate('date', 2012, 2030);
         
         //If the event corresponds to a date type 
@@ -44,7 +47,7 @@ App.controller.ReserveCreate = Backbone.View.extend({
         		name.indexOf("-month") != -1 ||
         		name.indexOf("-day") != -1){
         	//name is now the model name
-        	name = 'date';
+        	name = name.split("-")[0];
         }
         
         // Run validation rule (if any) on changed item
@@ -63,5 +66,31 @@ App.controller.ReserveCreate = Backbone.View.extend({
         	App.utils.displayValidationErrors(check.messages);
             return false;
         }
+        var store = new App.model.Store({id:this.model.get('store')});
+        var model = this.model;        
+        console.log(model.toJSON());
+        model.unset("date-year",{"silent":true});        
+        model.unset("date-month",{"silent":true});
+        model.unset("date-day",{"silent":true});
+        model.unset("date-format",{"silent":true});
+        console.log(model.toJSON());	
+        store.fetch({
+            success:function (data) {
+            	model.set({"store":data},{"silent":true});
+            	console.log(model.toJSON());
+            	model.save({},{        	
+                    success:function(model, response) {
+                        console.log('Successfully saved!');
+                    },
+                    error: function(model, error) {
+                        console.log(model.toJSON());
+                        console.log(error.responseText);
+                    }
+                });
+            },
+        	error:function(data){
+        		console.log("Error App.model.Store: id[" + id + ']');
+        	}
+        });
     }
 });

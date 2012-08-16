@@ -3,7 +3,7 @@ App.model.Store = Backbone.Model.extend({
     urlRoot: App.utils.getProperty('serverURL')+"stores/",
     
     defaults: {
-    	id : 0,
+    	id : null,
         name: '',
         phone: 0,
         address: '',

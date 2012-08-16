@@ -5,7 +5,7 @@ App.model.Reserve = Backbone.Model.extend({
 	
 	//Default values for the Reserve
     defaults: {    	
-    	id : 0,
+    	id : null,
         numPeople: 0,
         date: new Date(),        
         store: null
@@ -72,8 +72,14 @@ App.model.Reserve = Backbone.Model.extend({
             	return {isValid: true}; 
         };
         this.validators.date = function (value) {
-            if (value == null )
+            if (value == null)
             	return {isValid: false, message: "You must enter a valid date"};
+            else
+            	return {isValid: true}; 
+        };
+        this.validators.store = function (value) {
+            if (value == null || value == '')
+            	return {isValid: false, message: "You must select a store"};
             else
             	return {isValid: true}; 
         };

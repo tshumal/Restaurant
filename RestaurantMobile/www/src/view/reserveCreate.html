@@ -37,16 +37,16 @@
 				<option value="">DD</option>
 			</select>	
 		</fieldset>
-		
 	</div>
 	<div data-role="fieldcontain">
 	    <label for="store"><b>Store</b></label>	    
 		<select id="store">
-			<option value="0">Select Store</option>
-			<option value="1">Galerias</option>
-			<option value="2">Nicolas Federman</option>
+			<option value="">Select Store</option>
+			<% stores.each(function(item) { %>						
+			<option value="<%= item.id %>"><%= item.get('name') %></option>
+      		<% }); %>
 		</select>
 	</div>
-	<a class="save" href="#reserves" data-role="button" data-icon="check">Save Reserve</a>
+	<a class="save" data-role="button" data-icon="check">Save Reserve</a>
 	</form>
 </div>

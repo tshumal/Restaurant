@@ -12,6 +12,8 @@ App.controller.ReserveUpdate = Backbone.View.extend({
     render: function(){
     	//Triggers the model refresh to be passed to the view
     	this.model.change();
+    	//Renders the view with the associated elements
+        $(this.el).html( this.view({model:this.model}) );
     	//Show the view
     	App.view.changePage(this);
     	return this;

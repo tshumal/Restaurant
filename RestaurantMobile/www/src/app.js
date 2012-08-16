@@ -9,7 +9,7 @@ App.utils = App.utils || {
     			'property3':'value3'},
 
     // Get Property by Name from hash of preloaded properties
-    getProperty:function (name) {    	
+    getProperty:function (name) {
         return this.properties[name];
     },
     
@@ -30,7 +30,7 @@ App.utils = App.utils || {
     	//Removes all existing validation errors in the field
     	this.removeValidationError(field);
     	//Select the input with the error
-        var input = $('#'+field).parent();
+        var input = $('#'+field).closest('div[data-role=\'fieldcontain\']');
         //Add a label error with the desired message
         var html = '<label for=\"'+field+'\" class=\"error\">'+message+'</label>';
         input.append(html);
@@ -39,7 +39,7 @@ App.utils = App.utils || {
     //Remove Validation error in a specific field
     removeValidationError: function (field) {
     	//Remove the label error in the selected input
-    	var input = $('#'+field).parent();
+    	var input = $('#'+field).closest('div[data-role=\'fieldcontain\']');
     	$('label.error', input).remove();
     }
 };
@@ -87,7 +87,6 @@ App.view = App.view || {
     //Uses the change page method of JqueryMobile
     changePage:function (page) {
     	$(page.el).attr('data-role', 'page');
-    	$(page.el).html( page.view({model : page.model}) );
     	$('body').append($(page.el));
     	// JQuery Mobile Change Page
         var transition = $.mobile.defaultPageTransition;    	
@@ -231,8 +230,16 @@ App.router = Backbone.Router.extend({
     
     reserveCreate : function () {
     	//Initialize the Info   
-    	var model = new App.model.Reserve();
-    	new App.controller.ReserveCreate({model:model});
+    	var reserve = new App.model.Reserve();
+    	var stores = new App.collection.StoreCollection();        
+        stores.fetch({dataType : 'jsonp',
+        	success:function(data){        		
+        		new App.controller.ReserveCreate({model:reserve,stores:data});
+        	},
+        	error:function(data){
+        		console.log("Error App.collection.StoreCollection");
+        	}
+        });
     },
     
     reserveUpdate : function (id) {
