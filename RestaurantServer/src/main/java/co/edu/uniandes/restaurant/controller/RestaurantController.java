@@ -4,7 +4,6 @@
 package co.edu.uniandes.restaurant.controller;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +26,6 @@ public class RestaurantController implements Serializable {
 
 	private static final long serialVersionUID = -2656813892095831271L;
 
-	private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
-	
 	@Inject
 	private List<Store> stores;
 	
@@ -62,13 +59,13 @@ public class RestaurantController implements Serializable {
 		return nears;
 	}
 	
-	public void addReserve(int numPeople, int idStore, String date) throws Exception {
-		Reserve reserve = new Reserve();
-		reserve.setId(1 + (int)(Math.random() * ((1000 - 1) + 1)));
-		reserve.setNumPeople(numPeople);			
-		reserve.setDate(formatter.parse(date));
-		reserve.setSucursal(getStorebyId(idStore));
-		reserves.add(reserve);	
+	public void addReserve(Reserve reserve) throws Exception {
+		if (reserve != null){
+			reserve.setId(1 + (int)(Math.random() * ((1000 - 1) + 1)));
+			if (reserve.getStore() != null)
+				reserve.setStore(getStorebyId(reserve.getStore().getId()));
+			reserves.add(reserve);
+		}
 	}
 	
 	public void deleteReserve(int idReserve) throws Exception{

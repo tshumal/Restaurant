@@ -57,8 +57,7 @@ public class RestaurantRESTService {
    @Produces(MediaType.APPLICATION_JSON)
    public Response addReserve(Reserve reserve){
 	   try{
-		   System.out.println("reserve: " + reserve.toString());
-		   controller.addReserve(0, 0, null);
+		   controller.addReserve(reserve);
 		   return Response.ok().build();
 	   }
 	   catch (Exception e) {		   

@@ -43,8 +43,8 @@ public class Reserve {
 		return store;
 	}
 
-	public void setSucursal(Store sucursal) {
-		this.store = sucursal;
+	public void setStore(Store stoe) {
+		this.store = stoe;
 	}
 
 	public int getNumPeople() {

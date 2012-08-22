@@ -99,7 +99,7 @@ public class DataLoader implements Serializable {
 					reserve.setDate(formatter.parse(cell.getContents()));					
 					cell = sheet.getCell(3, j);
 					int idSucursal = Integer.parseInt(cell.getContents());
-					reserve.setSucursal(findStoreById(idSucursal));			
+					reserve.setStore(findStoreById(idSucursal));			
 					reserves.add(reserve);
 				}
 			}
