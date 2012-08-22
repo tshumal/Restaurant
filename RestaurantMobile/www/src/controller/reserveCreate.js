@@ -67,30 +67,24 @@ App.controller.ReserveCreate = Backbone.View.extend({
             return false;
         }
         var store = new App.model.Store({id:this.model.get('store')});
-        var model = this.model;        
-        console.log(model.toJSON());
-        model.unset("date-year",{"silent":true});        
-        model.unset("date-month",{"silent":true});
-        model.unset("date-day",{"silent":true});
-        model.unset("date-format",{"silent":true});
-        console.log(model.toJSON());	
+        var model = this.model;
         store.fetch({
             success:function (data) {
-            	model.set({"store":data},{"silent":true});
-            	console.log(model.toJSON());
-            	model.save({},{        	
-                    success:function(model, response) {
-                        console.log('Successfully saved!');
-                    },
-                    error: function(model, error) {
-                        console.log(model.toJSON());
-                        console.log(error.responseText);
-                    }
-                });
-            },
-        	error:function(data){
+            	model.set({"store":data});
+            	model.prepareModel();
+            	Backbone.sync('create', model, {
+            		  success: function(data) {
+            			  app.navigate("reserves",true);
+            			  console.log('Successfully saved!');
+            		  },
+            		  error: function(errMsg) {
+            			  console.log(errMsg.statusText);
+            	      }
+            	});
+           },
+           error:function(data){
         		console.log("Error App.model.Store: id[" + id + ']');
-        	}
+           }
         });
     }
 });

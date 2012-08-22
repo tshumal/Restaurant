@@ -29,6 +29,14 @@ App.model.Reserve = Backbone.Model.extend({
         });
     },
     
+    //Removes unused attributes on the server
+    prepareModel:function(){
+    	this.unset("date-year",{"silent":true});        
+        this.unset("date-month",{"silent":true});
+        this.unset("date-day",{"silent":true});
+        this.unset("date-format",{"silent":true});
+    },
+    
     //Used to initialize the date related values year, month, day and format
     //Every time the date changes they are refreshed
     changeDate:function (){

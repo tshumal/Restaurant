@@ -4,7 +4,7 @@ var App = App || {};
 App.utils = App.utils || {
 
     // Hash of preloaded properties for the app
-    properties:{'serverURL':'http://192.168.0.109:8080/RestaurantServer/rest/api/',
+    properties:{'serverURL':'http://192.168.0.100:8080/RestaurantServer/rest/api/',
     			'property2':'value2',
     			'property3':'value3'},
 
